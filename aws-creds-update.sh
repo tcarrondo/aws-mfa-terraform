@@ -4,7 +4,7 @@
 # sudo apt install jq awscli
 # Usage: 
 # add an alias like:
-# alias token-aws='<PATH>/aws-as-creds-update.sh'
+# alias token-aws='<PATH>/aws-creds-update.sh'
 # rename/copy config.vars-temp to config.vars and edit it
 # then:
 # $ token-aws 000000
