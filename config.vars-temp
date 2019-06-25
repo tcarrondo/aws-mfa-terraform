@@ -1,0 +1,4 @@
+mfa_token_sn='MFA-DEVICE-ARN'
+aws_base_profile='PROFILE-FOR-MFA'
+aws_update_profile='PRODUCTION-PROFILE'
+token_duration='129600' # 36h, max
