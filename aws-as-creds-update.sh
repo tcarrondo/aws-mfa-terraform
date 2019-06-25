@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Requirements:
+# sudo apt install jq awscli
 # Usage: 
 # add an alias like:
 # alias token-aws='<PATH>/aws-as-creds-update.sh'
