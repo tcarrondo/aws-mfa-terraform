@@ -16,8 +16,11 @@ type aws >/dev/null 2>&1 || { printf >&2 "aws is required for this script (snap 
 # preparing jq filter
 jq_filter='.[].Credentials.AccessKeyId,.[].Credentials.SecretAccessKey,.[].Credentials.SessionToken,.[].Credentials.Expiration'
 
+# loading vars file
+DIR="${BASH_SOURCE%/*}"
 
-jq_filter='.[].Credentials.AccessKeyId,.[].Credentials.SecretAccessKey,.[].Credentials.SessionToken'
+if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
+. "$DIR/config.vars"
 
 # need another duration?
 special_duration=$2
@@ -28,15 +31,15 @@ aws sts get-session-token --profile $aws_base_profile --token-code $1 --serial-n
 
 # update aws profile
 if [ $(sed '1q;d' ~/.new-creds) ]; then
-aws --profile $aws_update_profile configure set aws_access_key_id $(sed '1q;d' ~/.new-creds)
+    aws --profile $aws_update_profile configure set aws_access_key_id $(sed '1q;d' ~/.new-creds)
 fi
 
 if [ $(sed '2q;d' ~/.new-creds) ]; then
-aws --profile $aws_update_profile configure set aws_secret_access_key $(sed '2q;d' ~/.new-creds)
+    aws --profile $aws_update_profile configure set aws_secret_access_key $(sed '2q;d' ~/.new-creds)
 fi
 
 if [ $(sed '3q;d' ~/.new-creds) ]; then
-aws --profile $aws_update_profile configure set aws_session_token $(sed '3q;d' ~/.new-creds)
+  aws --profile $aws_update_profile configure set aws_session_token $(sed '3q;d' ~/.new-creds)
 fi
 
 if [ $(sed '4q;d' ~/.new-creds) ]; then
