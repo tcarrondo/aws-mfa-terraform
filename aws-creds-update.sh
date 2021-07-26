@@ -29,12 +29,14 @@ DIR="${BASH_SOURCE%/*}"
 if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
 . "$DIR/config.vars"
 
+read -p 'Token: ' token
+
 # need another duration?
-special_duration=$2
+special_duration=$1
 duration=${special_duration:=$token_duration}
 
 # get the token
-aws sts get-session-token --profile $aws_base_profile --token-code $1 --serial-number $mfa_token_sn --duration-seconds $duration | jq --slurp -r $jq_filter > ~/.$jq_output_filename
+aws sts get-session-token --profile $aws_base_profile --token-code $token --serial-number $mfa_token_sn --duration-seconds $duration | jq --slurp -r $jq_filter > ~/.$jq_output_filename
 
 # update aws profile
 if [ $(sed '1q;d' ~/.$jq_output_filename) ]; then
