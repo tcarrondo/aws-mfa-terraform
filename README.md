@@ -22,14 +22,16 @@ role_arn = arn:aws:iam::123456789012:role/a_nice_role
 ```
 (REDACTED values will be updated later when you run aws-mfa-terraform)
 
-## Add this to your `~/.aws/config` file:
+## Add this to a new file `~/.aws/config.vars` file:
 ```
-[default]
-(...)
 # aws-mfa-terraform
-mfa_token_sn       = arn:aws:iam::123456789012:mfa/<AWS_PROFILE_USERNAME>
-aws_base_profile   = profile-for-mfa
-aws_update_profile = profile-with-updated-token
-token_duration     = 129600 # 36h, max
+mfa_token_sn=arn:aws:iam::123456789012:mfa/<AWS_PROFILE_USERNAME>
+aws_base_profile=profile-for-mfa
+aws_update_profile=profile-with-updated-token
+token_duration=129600 # 36h, max
 ```
 
+## Run the script:
+```
+$ ./aws-creds-update.sh
+```
