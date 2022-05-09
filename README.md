@@ -3,7 +3,7 @@ A simple script to update the **~.aws/credentials** with temporary MFA credentia
 
 # Usage:
 
-## Add/edit 2 profiles to your `~/.aws/credentials`:
+## Add/edit 3 profiles to your `~/.aws/credentials`:
 ```
 [profile-for-mfa]
 aws_access_key_id = <AWS_ACCESS_KEY_ID>
@@ -34,4 +34,10 @@ token_duration=129600 # 36h, max
 ## Run the script:
 ```
 $ ./aws-creds-update.sh
+```
+
+## ...and test the result:
+
+```
+$ aws s3 ls --profile profile-in-use
 ```
