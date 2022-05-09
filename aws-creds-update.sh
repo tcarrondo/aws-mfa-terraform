@@ -26,8 +26,8 @@ fi
 # loading vars file
 DIR="${BASH_SOURCE%/*}"
 
-if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
-. "$DIR/config.vars"
+: ${AWS_CONFIG_FILE:=~/.aws/config}
+. "$AWS_CONFIG_FILE.vars"
 
 read -p 'Token: ' token
 
